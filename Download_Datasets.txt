@@ -1,0 +1,16 @@
+1) Download dataset NSL-KDD from:
+
+https://www.unb.ca/cic/datasets/nsl.html
+
+*Save the files as: KDDTrain.csv and KDDTest.csv
+
+2) Download dataset UNSW-NB15 from:
+
+https://www.unsw.adfa.edu.au/unsw-canberra-cyber/cybersecurity/ADFA-NB15-Datasets/
+
+*Save the files as: UNSWTrain.csv and UNSWTest.csv
+
+3) To generate the KDDPCATrain.csv, KDDPCATest.csv and UNSWPCATrain.csv, UNSWPCATest.csv datasets, run the CORR_PCA_KDD.r and CORR_PCA_UNSW.r scripts, respectively.
+
+*Change the storage location of the datasets.
+

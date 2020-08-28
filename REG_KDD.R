@@ -1,6 +1,7 @@
 # Logistic Regression
-# Training Stage 
-path="C:/Users/Diego/Desktop/KDDTrain.csv" 
+# Training Stage
+library(tictoc)
+path="~/KDDTrain.csv" 
 nids = as.matrix(read.csv(file=path, header=FALSE, sep=";"))
 y = nids[,42] 
 y = (y=="anomaly")*1 #anomaly is 1
@@ -78,11 +79,12 @@ x40 = nids[,40]
 x40 = as.numeric(x40) 
 x41 = nids[,41] 
 x41 = as.numeric(x41) 
-
+tic("time_training")
 nids_sol = glm(y ~ x1+x5+x6+x7+x8+x9+x10+x11+x12+x13+x14+x15+x16+x17+x18+x19+x21+x22+x23+x24+x25+x26+x27+x28+x29+x30+x31+x32+x33+x34+x35+x36+x37+x38+x39+x40+x41,family=binomial(link="logit"))
+toc()
 
 # Test Stage 
-path="C:/Users/Diego/Desktop/KDDTest.csv" 
+path="~/KDDTest.csv" 
 nids = as.matrix(read.csv(file=path, header=FALSE, sep=";"))
 yt = nids[,42] 
 yt = (yt=="anomaly")*1 #anomaly is 1

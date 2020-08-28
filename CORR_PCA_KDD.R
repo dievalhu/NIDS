@@ -1,8 +1,27 @@
 # Correlation Matrix
 library("corrplot") 
+path = "~/KDDCompleto.csv" 
+nids = as.data.frame(read.csv(file=path, header=FALSE, sep=";"))
+nids <- nids[,-(2:4),drop=FALSE]
+nids <- nids[,-(17),drop=FALSE]
+nids <- nids[,-(38),drop=FALSE]
+corr <- cor(nids) 
+corrplot(corr,tl.cex=0.5) #plot
+
+# Test de Barlett
+bt = bartlett.test(nids[, 1:37])
+
+# Kaiser, Meyer, Olkin - KMO
+#install.packages("REdaS")
+library("REdaS")
+kmo = KMOS(nids[, 1:37])
+
+# PCA
+pca_total = prcomp(nids, center = TRUE, scale. = TRUE) 
+summary(pca_total)
 
 # PCA Training
-path1 = "C:/Users/Diego/Desktop/KDDTrain.csv" 
+path1 = "~/KDDTrain.csv" 
 nids1 = as.data.frame(read.csv(file=path1, header=FALSE, sep=";"))
 nids1 <- nids1[,-(2:4),drop=FALSE]
 nids1 <- nids1[,-(17),drop=FALSE]
@@ -26,10 +45,10 @@ summary(pca_train)
 comp_train = predict(pca_train, newdata=tail(nids1, dim(nids1)[1]))
 
 # Export New Training Dataset
-write.csv(comp_train, file = "C:/Users/Diego/Desktop/KDDPCATrain.csv")
+write.csv(comp_train, file = "~/KDDPCATrain.csv")
 
 # PCA Test
-path2 = "C:/Users/Diego/Desktop/KDDTest.csv" 
+path2 = "~/KDDTest.csv" 
 nids2 = as.data.frame(read.csv(file=path2, header=FALSE, sep=";"))
 nids2 <- nids2[,-(2:4),drop=FALSE]
 nids2 <- nids2[,-(17),drop=FALSE]
@@ -53,4 +72,4 @@ summary(pca_test)
 comp_test = predict(pca_test, newdata=tail(nids2, dim(nids2)[1]))
 
 # Export New Training Dataset
-write.csv(comp_test, file = "C:/Users/Diego/Desktop/KDDPCATest.csv")
+write.csv(comp_test, file = "~/KDDPCATest.csv")

@@ -1,11 +1,12 @@
 # Logistic Regression
 # Training Stage 
-path1="C:/Users/Diego/Desktop/KDDTrain.csv" 
+library(tictoc)
+path1="~/KDDTrain.csv" 
 nids1 = as.matrix(read.csv(file=path1, header=FALSE, sep=";"))
 y = nids1[,42] 
 y = (y=="anomaly")*1 #anomaly is 1
 
-path="C:/Users/Diego/Desktop/KDDPCATrain.csv" 
+path="~/KDDPCATrain.csv" 
 nids = as.matrix(read.csv(file=path, header=TRUE, sep=","))
 x1 = nids[,2] 
 x1 = as.numeric(x1) 
@@ -45,12 +46,13 @@ x18 = nids[,19]
 x18 = as.numeric(x18) 
 x19 = nids[,20] 
 x19 = as.numeric(x19) 
-
+tic("time_training")
 nids_sol = glm(y ~ x1+x2+x3+x4+x5+x6+x7+x8+x9+x10+x11+x12+x13+x14+x15+x16+x17+x18+x19,family=binomial(link="logit"),
                control = list(maxit = 500)) 
+toc()
 
 # Test Stage 
-path="C:/Users/Diego/Desktop/KDDPCATest.csv" 
+path="~/KDDPCATest.csv" 
 nids = as.matrix(read.csv(file=path, header=TRUE, sep=","))
 x1t = nids[,2] 
 x1t = as.numeric(x1t) 
@@ -140,7 +142,7 @@ minit = min(y_estimt)
 tresholdt = (minit+maxit)/2 # treshold decision
 treshold_1t = rep(c(tresholdt),each=length(y_estimt)) #vector of treshold decision
 reg_pred = (y_estimt > tresholdt)*1 
-path2="C:/Users/Diego/Desktop/KDDTest.csv" 
+path2="~/KDDTest.csv" 
 nids2 = as.matrix(read.csv(file=path2, header=FALSE, sep=";"))
 yt = nids2[,42] 
 yt = (yt=="anomaly")*1 #anomaly is 1

@@ -1,5 +1,5 @@
 # Multidimensional Scaling
-path1 = "C:/Users/Diego/Desktop/KDDTest.csv" 
+path1 = "~/KDDTest.csv" 
 nids1 = as.data.frame(read.csv(file=path1, header=FALSE, sep=";"))
 nids1 <- nids1[,-(2:4),drop=FALSE]
 nids1 <- nids1[,-(17),drop=FALSE]

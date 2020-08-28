@@ -3,17 +3,20 @@
 library(e1071)
 library(caTools)
 library(readr)
-path="C:/Users/Diego/Desktop/UNSWTrain.csv" 
+library(tictoc)
+path="~/UNSWTrain.csv" 
 nids = as.data.frame(read.csv(file=path, header=FALSE, sep=","))
 nids <- nids[,-(1),drop=FALSE]
 nids <- nids[,-(2:4),drop=FALSE]
 nids <- nids[,-(23),drop=FALSE]
 nids <- nids[,-(34),drop=FALSE]
 nids <- nids[,-(38),drop=FALSE]
+tic("time_training")
 model <- svm(nids$V45 ~ ., data = nids,type = 'C-classification', kernel = 'radial')
+toc()
 
 #TEST
-path1="C:/Users/Diego/Desktop/UNSWTest.csv" 
+path1="~/UNSWTest.csv" 
 nids1 = as.data.frame(read.csv(file=path1, header=FALSE, sep=","))
 nids1 <- nids1[,-(1),drop=FALSE]
 nids1 <- nids1[,-(2:4),drop=FALSE]

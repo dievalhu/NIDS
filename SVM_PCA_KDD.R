@@ -3,24 +3,27 @@
 library(e1071)
 library(caTools)
 library(readr)
-path1="C:/Users/Diego/Desktop/KDDTrain.csv" 
+library(tictoc)
+path1="~/KDDTrain.csv" 
 nids1 = as.matrix(read.csv(file=path1, header=FALSE, sep=";"))
 y = nids1[,42] 
 y = (y=="anomaly")*1 #anomaly is 1
 
-path="C:/Users/Diego/Desktop/KDDPCATrain.csv" 
+path="~/KDDPCATrain.csv" 
 nids = as.matrix(read.csv(file=path, header=TRUE, sep=","))
 nids <- nids[,-(1),drop=FALSE]
 nids <- nids[,-(20:37),drop=FALSE]
+tic("time_training")
 model <- svm(y ~ ., data = nids,type = 'C-classification', kernel = 'radial')
+toc()
 
 #TEST
-path2="C:/Users/Diego/Desktop/KDDTest.csv" 
+path2="~/KDDTest.csv" 
 nids2 = as.matrix(read.csv(file=path2, header=FALSE, sep=";"))
 y2 = nids2[,42] 
 y2 = (y2=="anomaly")*1 #anomaly is 1
 
-path3="C:/Users/Diego/Desktop/KDDPCATest.csv" 
+path3="~/KDDPCATest.csv" 
 nids3 = as.matrix(read.csv(file=path3, header=TRUE, sep=","))
 nids3 <- nids3[,-(1),drop=FALSE]
 nids3 <- nids3[,-(20:37),drop=FALSE]

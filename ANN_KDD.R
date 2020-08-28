@@ -1,7 +1,8 @@
 # Artificial Neural Network
 # Training Stage 
 library(neuralnet)
-nids<- read.csv("C:/Users/Diego/Desktop/KDDTrain.csv", header=FALSE, sep=";")
+library(tictoc)
+nids<- read.csv("~/KDDTrain.csv", header=FALSE, sep=";")
 y = nids[,42] 
 y = (y=="anomaly")*1 #anomaly is 1
 x1 = nids[,1] 
@@ -79,10 +80,12 @@ x40 = as.numeric(x40)
 x41 = nids[,41] 
 x41 = as.numeric(x41) 
 ntrain = cbind.data.frame(x1,x5,x6,x7,x8,x9,x10,x11,x12,x13,x14,x15,x16,x17,x18,x19,x21,x22,x23,x24,x25,x26,x27,x28,x29,x30,x31,x32,x33,x34,x35,x36,x37,x38,x39,x40,x41,y)
+tic("time_training")
 ann <- neuralnet(y ~ x1+x5+x6+x7+x8+x9+x10+x11+x12+x13+x14+x15+x16+x17+x18+x19+x21+x22+x23+x24+x25+x26+x27+x28+x29+x30+x31+x32+x33+x34+x35+x36+x37+x38+x39+x40+x41, ntrain, hidden = c(1))
+toc()
 
 # Test Stage 
-nids1<- read.csv("C:/Users/Diego/Desktop/KDDTest.csv", header=FALSE, sep=";")
+nids1<- read.csv("~/KDDTest.csv", header=FALSE, sep=";")
 yt = nids1[,42] 
 yt = (yt=="anomaly")*1 #anomaly is 1
 x1t = nids1[,1] 
